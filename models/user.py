@@ -10,7 +10,7 @@ class User(BaseModel, Base):
 
     __tablename__ = "users"
     first_name = Column(String(128), nullable=True)
-    last_name = Column(String(128) nullable=True)
+    last_name = Column(String(128), nullable=True)
     password = Column(String(128), nullable=False)
     places = relationship("Place", backref="user", cascade="delete")
     email = Column(String(128), nullable=False)
