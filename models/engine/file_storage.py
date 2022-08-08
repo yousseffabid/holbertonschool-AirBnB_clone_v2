@@ -3,13 +3,6 @@
 
 from json import dumps, loads
 from os.path import exists
-from models.base_model import BaseModel
-from models.user import User
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
 class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
     __file_path = 'file.json'
@@ -41,6 +34,13 @@ class FileStorage:
     
     def reload(self):
         """Loads storage dictionary from file"""
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.place import Place
+        from models.review import Review
         if exists(self.__file_path):
             with open(self.__file_path, mode='r', encoding='utf-8') as my_file:
                 my_json = loads(my_file.read())
