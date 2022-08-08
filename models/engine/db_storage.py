@@ -25,15 +25,12 @@ class DBStorage:
             {getenv('HBNB_MYSQL_PWD')}@{getenv('HBNB_MYSQL_HOST')}\
             :3306/{getenv('HBNB_MYSQL_DB')}", pool_pre_ping=True)
 
-        self.reload()
         if getenv("HBNB_ENV") == "test":
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         """Return all objects in a dict"""
 
-        Base.metadata.create_all(self.__engine)
-        self.__session = Session(self.__engine)
         if cls is not None:
             if type(cls) == str:
                 cls = eval(cls)
