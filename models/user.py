@@ -8,10 +8,19 @@ from sqlalchemy.orm import relationship
 class User(BaseModel, Base):
     """ User class """
 
-    __tablename__ = "users"
-    first_name = Column(String(128), nullable=True)
-    last_name = Column(String(128), nullable=True)
-    password = Column(String(128), nullable=False)
-    places = relationship("Place", backref="user", cascade="delete")
-    email = Column(String(128), nullable=False)
-    reviews = relationship("Review", backref="user", cascade="delete")
+    if getenv("HBNB_TYPE_STORAGE") == "db":
+        __tablename__ = "users"
+        first_name = Column(String(128), nullable=True)
+        last_name = Column(String(128), nullable=True)
+        password = Column(String(128), nullable=False)
+        places = relationship("Place", backref="user", cascade="delete")
+        email = Column(String(128), nullable=False)
+        reviews = relationship("Review", backref="user", cascade="delete")
+    else:
+        first_name = ""
+        last_name = ""
+        email = ""
+
+    def __init__(self, *args, **kwargs):
+        """Initialize model."""
+        super().__init__(*args, **kwargs)
