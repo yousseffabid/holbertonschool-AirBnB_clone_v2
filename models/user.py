@@ -13,9 +13,8 @@ class User(BaseModel, Base):
         first_name = Column(String(128), nullable=True)
         last_name = Column(String(128), nullable=True)
         password = Column(String(128), nullable=False)
-        places = relationship("Place", backref="user", cascade="delete")
+        places = relationship("Place", back_populates="user")
         email = Column(String(128), nullable=False)
-        reviews = relationship("Review", backref="user", cascade="delete")
     else:
         first_name = ""
         last_name = ""
