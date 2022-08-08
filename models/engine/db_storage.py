@@ -33,7 +33,7 @@ class DBStorage:
         """Return all objects in a dict"""
         if cls is not None:
             cls = eval(cls)
-            objects = self.__session.query(User).all()
+            objects = self.__session.query(cls).all()
         else:
             objects = self.__session.query(User).all()
             objects.extend(self.__session.query(Place).all())
