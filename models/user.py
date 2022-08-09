@@ -15,10 +15,12 @@ class User(BaseModel, Base):
         password = Column(String(128), nullable=False)
         places = relationship("Place", back_populates="user")
         email = Column(String(128), nullable=False)
+        reviews = relationship("Review", backref="user")
     else:
         first_name = ""
         last_name = ""
         email = ""
+        password = ""
 
     def __init__(self, *args, **kwargs):
         """Initialize model."""
