@@ -6,6 +6,16 @@ from sqlalchemy import Column, Integer, String, ForeignKey, Float, Table
 from sqlalchemy.orm import relationship
 import models
 
+
+place_amenity = Table('place_amenity', Base.metadata,
+                      Column('place_id', String(60),
+                             ForeignKey('places.id'),
+                             primary_key=True, nullable=False),
+                      Column('amenity_id', String(60),
+                             ForeignKey('amenities.id'),
+                             primary_key=True, nullable=False)
+                      )
+
 class Place(BaseModel, Base):
     """ A place to stay """
     from models.city import City
@@ -24,6 +34,8 @@ class Place(BaseModel, Base):
         latitude = Column(Float, nullable=True)
         longitude = Column(Float, nullable=True)
         reviews = relationship("Review", backref="place")
+        amenities = relationship("Amenity", secondary="place_amenity",
+                                 backref="place_amenities",viewonly=False)
     else:
         city_id = ""
         user_id = ""
@@ -46,6 +58,15 @@ class Place(BaseModel, Base):
                 if self.id == review.place_id:
                     arr.append(review)
             return arr
+        @property
+        def amenities(self):
+            """Get amenities"""
+            return self.__class__.amenity_ids
+
+        @amenities.setter
+        def amenities(self, obj):
+            if obj.__class__.__name__ == "Amenity":
+                self.__class__.amenity_ids.append(obj.id)
 
     def __init__(self, *args, **kwargs):
         """Initialize model."""
