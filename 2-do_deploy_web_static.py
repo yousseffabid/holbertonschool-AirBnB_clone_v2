@@ -23,6 +23,14 @@ def do_deploy(archive_path):
            (file, name)).failed is True:
         return False
 
+    if run("mv /data/web_static/releases/{}/web_static/* "
+           "/data/web_static/releases/{}/".format(name, name)).failed is True:
+        return False
+
+    if run("rm -rf /data/web_static/releases/{}/web_static".
+           format(name)).failed is True:
+        return False
+
     if run("rm -rf /temp/{}".format(file)).failed is True:
         return False
 
