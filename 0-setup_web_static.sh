@@ -7,11 +7,9 @@ sudo apt-get -y install nginx
 sudo mkdir -p /data/web_static/releases/test/
 sudo mkdir -p /data/web_static/shared/
 
-sudo touch /data/web_static/releases/test/index.html
+echo $'<html>\n\t<head>\n\t</head>\n\t<body>\n\t\tHolberton School\n\t</body>\n</html>' | sudo tee /data/web_static/releases/test/index.html > /dev/null
 
 sudo ln -fs /data/web_static/releases/test/ /data/web_static/current
-
-echo $'<html>\n\t<head>\n\t</head>\n\t<body>\n\t\tHolberton School\n\t</body>\n</html>' | sudo tee /data/web_static/releases/test/index.html > /dev/null
 
 sudo chown -R ubuntu:ubuntu /data/
 
