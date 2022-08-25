@@ -9,11 +9,9 @@ sudo mkdir -p /data/web_static/releases/test/
 
 sudo touch /data/web_static/releases/test/index.html
 
-sudo ln -sf /data/web_static/current /data/web_static/releases/test/
+sudo ln -fs /data/web_static/releases/test/ /data/web_static/current
 
 echo $'<html>\n\t<head>\n\t</head>\n\t<body>\n\t\tWelcome To Holberton\n\t</body>\n</html>' | sudo tee /data/web_static/releases/test/index.html > /dev/null
-
-sudo apt-get update -y
 
 sudo chown -R ubuntu:ubuntu /data/
 
