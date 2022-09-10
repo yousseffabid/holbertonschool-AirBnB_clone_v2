@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """7-states_list Module"""
 from flask import Flask, render_template
-from models import storage
+import models
 from models.state import State
 
 app = Flask(__name__)
@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route('/states_list', strict_slashes=False)
 def list_states():
     """Displays html page"""
-    states = storage.all(State)
+    states = models.storage.all(State)
     return render_template('7-states_list.html', states=states)
 
 
@@ -18,7 +18,7 @@ def list_states():
 def appcontext_teardown(self):
     """use storage for fetching data from the storage engine
     """
-    storage.close()
+    models.storage.close()
 
 
 if __name__ == '__main__':
