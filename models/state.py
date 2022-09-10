@@ -4,7 +4,6 @@ from models.base_model import BaseModel
 from sqlalchemy import String, ForeignKey, Column
 from models.base_model import Base
 from sqlalchemy.orm import relationship
-from models.city import City
 from os import getenv
 import models
 
@@ -25,6 +24,7 @@ class State(BaseModel, Base):
             """ returns the list of City instances
             with the appropriate state_id
             """
+            from models.city import City
             list_city = []
             for city in models.storage.all(City).values():
                 if city.state_id == self.id:
