@@ -45,7 +45,7 @@ class DBStorage:
 
         obj_dict = {}
         for obj in objects:
-            obj_dict[f"{type(obj).__name__,}.{obj.id}"] = obj
+            obj_dict["{}.{}".format(type(obj).__name__, obj.id)] = obj
 
         return obj_dict
 

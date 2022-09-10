@@ -23,7 +23,7 @@ class FileStorage:
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
-        self.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
+        self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
 
     def save(self):
         """Saves storage dictionary to file"""
@@ -53,7 +53,7 @@ class FileStorage:
         """delete obj from __objects"""
         if obj is not None:
             try:
-                del self.__objects[f"{type(obj).__name__}.{obj.id}"]
+                del self.__objects["{}.{}".format(type(obj).__name__, obj.id)]
                 self.save()
             except (AttributeError, KeyError):
                 pass
