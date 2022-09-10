@@ -23,7 +23,7 @@ def c_text(text):
     """Display text"""
 
     text = text.replace('_', ' ')
-    return (f"C {text}")
+    return "C {}".format(text)
 
 
 @app.route("/python", strict_slashes=False)
@@ -32,14 +32,14 @@ def python_text(text="is cool"):
     """Display text"""
 
     text = text.replace('_', ' ')
-    return (f"Python {text}")
+    return "Python {}".format(text)
 
 
 @app.route("/number/<int:n>", strict_slashes=False)
 def is_integer(n):
     """Display integer"""
 
-    return (f"{n}")
+    return "{} is a number".format(n)
 
 
 @app.route("/number_template/<int:n>", strict_slashes=False)
