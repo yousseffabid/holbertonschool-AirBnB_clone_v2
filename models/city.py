@@ -6,6 +6,7 @@ from models.base_model import Base
 from sqlalchemy.orm import relationship
 from os import getenv
 
+
 class City(BaseModel, Base):
     """ The city class, contains state ID and name """
     from models.state import State
@@ -20,4 +21,4 @@ class City(BaseModel, Base):
 
     def __init__(self, *args, **kwargs):
         """Initialize model."""
-        super().__init__(*args, **kwargs) 
+        super().__init__(*args, **kwargs)

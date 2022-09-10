@@ -3,6 +3,8 @@
 
 from json import dumps, loads
 from os.path import exists
+
+
 class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
     __file_path = 'file.json'
@@ -25,12 +27,12 @@ class FileStorage:
 
     def save(self):
         """Saves storage dictionary to file"""
-        with open(FileStorage.__file_path, 'w') as f:
-            my_json = dict()
-            for key, value in self.__objects.items():
-                my_json[key] = value.to_dict()
-            with open(self.__file_path, mode='w', encoding='utf-8') as my_file:
-                my_file.write(dumps(my_json))
+        my_json = dict()
+        for key, value in self.__objects.items():
+            my_json[key] = value.to_dict()
+
+        with open(self.__file_path, mode='w', encoding='utf-8') as my_file:
+            my_file.write(dumps(my_json))
     
     def reload(self):
         """Loads storage dictionary from file"""
@@ -55,3 +57,7 @@ class FileStorage:
                 self.save()
             except (AttributeError, KeyError):
                 pass
+
+    def close(self):
+        """close session and reload"""
+        self.reload()
