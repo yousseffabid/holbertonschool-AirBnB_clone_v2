@@ -33,7 +33,7 @@ class FileStorage:
 
         with open(self.__file_path, mode='w', encoding='utf-8') as my_file:
             my_file.write(dumps(my_json))
-    
+
     def reload(self):
         """Loads storage dictionary from file"""
         from models.base_model import BaseModel

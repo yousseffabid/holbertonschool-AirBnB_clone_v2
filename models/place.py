@@ -8,13 +8,13 @@ import models
 
 if getenv("HBNB_TYPE_STORAGE") == 'db':
     place_amenity = Table('place_amenity', Base.metadata,
-            Column('place_id', String(60),
-                ForeignKey('places.id'),
-                primary_key=True, nullable=False),
-            Column('amenity_id', String(60),
-                ForeignKey('amenities.id'),
-                primary_key=True, nullable=False)
-            )
+                          Column('place_id', String(60),
+                                 ForeignKey('places.id'),
+                                 primary_key=True, nullable=False),
+                          Column('amenity_id', String(60),
+                                 ForeignKey('amenities.id'),
+                                 primary_key=True, nullable=False))
+
 
 class Place(BaseModel, Base):
     """ A place to stay """
@@ -35,7 +35,7 @@ class Place(BaseModel, Base):
         longitude = Column(Float, nullable=True)
         reviews = relationship("Review", backref="place")
         amenities = relationship("Amenity", secondary="place_amenity",
-                                 backref="place_amenities",viewonly=False)
+                                 backref="place_amenities", viewonly=False)
     else:
         city_id = ""
         user_id = ""
@@ -48,7 +48,7 @@ class Place(BaseModel, Base):
         latitude = 0.0
         longitude = 0.0
         amenity_ids = []
-        
+
         @property
         def reviews(self):
             """Get reviews"""
@@ -58,6 +58,7 @@ class Place(BaseModel, Base):
                 if self.id == review.place_id:
                     arr.append(review)
             return arr
+
         @property
         def amenities(self):
             """Get amenities"""
